@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .title {
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  // 创建虚拟dom
+  /*
+  1. 定义DOM最外层不需要写引号
+  2. {}中写js表达式
+  3. className属性表示html的class属性
+  4. style内链样式需要用{}包裹一个map键值对
+  5. 最外层需要有一个根标签，所有的标签都需要闭合
+  6. 标签解析：
+      （1）小写字母开头的会解析为html标签
+      （2）大写字母开头的会解析为组件
+   */
+  const title = 'Hello,React'
+  const id = 'title'
+  const VDOM = (
+    <div>
+      <h3 id={id} className="title">
+        <span style={{color: 'white', fontSize: '20px'}}>{title}</span>
+      </h3>
+      <input type="text"/>
+      <good>123</good>
+    </div>
+  )
+  // 渲染虚拟dom
+  ReactDOM.render(VDOM, document.getElementById("app"))
+</script>
+</body>
+</html>

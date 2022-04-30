@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  class MyComponent extends React.Component {
+    // 初始化状态
+    state = {
+      like: 0,
+      name: 'admin'
+    }
+
+    render() {
+      const {like, name} = this.state
+      return (
+        <div>
+          <div>用户名： {name}</div>
+          <div>点赞数：{like}</div>
+          <button onClick={this.addLike}>点赞</button>
+        </div>
+      )
+    }
+
+    addLike = () => {
+      // addLike = () => {} 是赋值语句，类似a=1，addLike直接在组件对象上，而不是Prototype上
+      // 箭头函数没有指定this时会向外层查找
+      console.log(this)
+      // react禁止直接更改状态值，需通过setState() API
+      this.setState({like: ++this.state.like})
+    }
+  }
+
+  ReactDOM.render(<MyComponent/>, document.getElementById("app"))
+</script>
+</body>
+</html>
