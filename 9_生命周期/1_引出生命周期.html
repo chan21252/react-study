@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title></title>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  class Life extends React.Component {
+    state = {
+      opacity: 1.0
+    }
+
+    die = () => {
+      ReactDOM.unmountComponentAtNode(document.getElementById("app"))
+    }
+
+    render() {
+      return (
+        <div>
+          <h3 style={{opacity: this.state.opacity}}>React你学会了吗？</h3>
+          <button onClick={this.die}>不活了</button>
+        </div>
+      )
+    }
+
+    // 在组件挂载后（插入 DOM 树中）立即调用
+    // 如需通过网络请求获取数据，此处是实例化请求的好地方
+    componentDidMount() {
+      this.timer = setInterval(() => {
+        let {opacity} = this.state
+        opacity = opacity <= 0 ? 1 : (opacity - 0.1)
+        this.setState({opacity: opacity})
+      }, 200)
+    }
+
+    // 当组件从 DOM 中移除时
+    componentWillUnmount() {
+      clearInterval(this.timer)
+    }
+  }
+
+  ReactDOM.render(<Life/>, document.getElementById("app"))
+</script>
+</body>
+</html>
