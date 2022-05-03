@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  class Demo extends React.Component {
+    constructor() {
+      super()
+      this.myRef1 = React.createRef()
+    }
+
+    myRef2 = React.createRef()
+    state = {
+      isHot: true
+    }
+
+    showInput1 = () => {
+      console.log(this.myRef1)
+      alert(this.myRef1.current.value)
+    }
+
+    showInput2 = () => {
+      alert(this.myRef2.current.value)
+    }
+    
+    changeHot = () => {
+      this.setState({isHot: !this.state.isHot})
+    }
+    render() {
+      return (
+        <div>
+          <h3 onClick={this.changeHot}>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h3>
+          <input ref={this.myRef1} type="text" name="input1"/>
+          <button onClick={this.showInput1}>点击提示输入框文字</button>
+          <input ref={this.myRef2} onBlur={this.showInput2} type="text" name="input2" placeholder="失去焦点时提示文字"/>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Demo/>, document.getElementById("app"))
+</script>
+</body>
+</html>

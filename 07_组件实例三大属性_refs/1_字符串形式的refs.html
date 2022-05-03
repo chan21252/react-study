@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  class Demo extends React.Component {
+    showInput1 = () => {
+      const {input1} = this.refs
+      alert(input1.value)
+    }
+
+    showInput2 = () => {
+      const {input2} = this.refs
+      alert(input2.value)
+    }
+    render() {
+      return (
+        <div>
+          <!-- 我们不建议使用它，因为 string 类型的 refs 存在 一些问题。它已过时并可能会在未来的版本被移除。-->
+          <input ref="input1" type="text" name="input1"/>
+          <button onClick={this.showInput1}>点击提示输入框文字</button>
+          <input ref="input2" onBlur={this.showInput2} type="text" name="input2" placeholder="失去焦点时提示文字"/>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Demo/>, document.getElementById("app"))
+</script>
+</body>
+</html>
