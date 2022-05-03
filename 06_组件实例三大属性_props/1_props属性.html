@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+        border-collapse: collapse;
+    }
+    tr, td, th {
+        border: solid 1px #e7e7e7;
+        border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  const person1 = {
+    name: '小张',
+    age: 20,
+    sex: '女'
+  }
+
+  const personArr = [
+    {
+      name: '小李',
+      age: 20,
+      sex: '男'
+    },
+    {
+      name: '小赵',
+      age: 17,
+      sex: '女'
+    },
+  ]
+
+  class Person extends React.Component {
+    constructor(props) {
+      super(props)
+    }
+
+    render() {
+      const {name, age, sex} = this.props
+      return (
+        <tr>
+          <td>{name}</td>
+          <td>{age}</td>
+          <td>{sex}</td>
+        </tr>
+      )
+    }
+  }
+
+  class PersonList extends React.Component {
+    render() {
+      return (
+        <table>
+          <thead>
+          <tr>
+            <th>name</th>
+            <th>age</th>
+            <th>sex</th>
+          </tr>
+          </thead>
+          <tbody id="data">
+            <Person name="小明" age={18} sex="男" />
+            <Person name="小王" age={19} sex="女" />
+            <Person {...person1} />
+            {personArr.map((item, index) => {
+              return <Person {...item} key={index}/>
+            })}
+          </tbody>
+        </table>
+      )
+    }
+  }
+
+  ReactDOM.render(<PersonList/>, document.getElementById("app"))
+
+</script>
+</body>
+</html>
