@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title></title>
+  <style>
+    .list {
+      width: 200px;
+      height: 150px;
+      overflow-y: scroll;
+      background: #1fa9da;
+    }
+
+    .news {
+      width: 100%;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+
+<!-- react核心库 -->
+<script src="../lib/react.development.js"></script>
+<!-- react操作dom -->
+<script src="../lib/react-dom.development.js"></script>
+<!-- jsx转js -->
+<script src="../lib/babel.min.js"></script>
+<script type="text/babel">
+  class NewsList extends React.Component {
+    state = {
+      newsArr: []
+    }
+
+    setListRef = (e) => {
+      this.listRef = e
+    }
+
+    componentDidMount() {
+      this.timer = setInterval(() => {
+        let {newsArr} = this.state
+        this.setState({newsArr: [newsArr.length + 1, ...newsArr]})
+      }, 1000)
+    }
+
+    componentWillUnmount() {
+      clearInterval(this.timer)
+    }
+
+    getSnapshotBeforeUpdate(preProps, preState) {
+      // 记录下当前的滚动高度
+      return this.listRef.scrollTop
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+      // 更新一条新闻后，滚动高度也加30
+      this.listRef.scrollTop = snapshot + 30
+    }
+
+    render() {
+      return (
+        <div className="list" ref={this.setListRef}>
+          {this.state.newsArr.map((item, index) => {
+            return <div className="news" key={index}>新闻{item}</div>
+          })}
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<NewsList/>, document.getElementById("app"))
+</script>
+</body>
+</html>
