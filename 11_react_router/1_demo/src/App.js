@@ -1,11 +1,12 @@
 import './App.css';
 
 import React, {Component} from 'react';
-import {Link, Route} from "react-router-dom";
+import {Link, NavLink, Route} from "react-router-dom";
 import Header from "./component/Header";
-import Home from "./component/Home";
 import Footer from "./component/Footer";
-import About from "./component/About";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import MyNavLink from "./component/MyNavLink";
 
 class App extends Component {
   render() {
@@ -18,8 +19,8 @@ class App extends Component {
             </div>
             <ul className="menu-list">
               {/* 编写路由 */}
-              <Link to="/home" className="menu-item">主页</Link>
-              <Link to="/about" className="menu-item">关于</Link>
+              <MyNavLink to="/home">主页</MyNavLink>
+              <MyNavLink to="/about">关于</MyNavLink>
             </ul>
           </div>
         </aside>
