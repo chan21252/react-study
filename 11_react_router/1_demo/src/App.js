@@ -1,7 +1,7 @@
 import './App.css';
 
 import React, {Component} from 'react';
-import {Link, NavLink, Route} from "react-router-dom";
+import {Link, NavLink, Redirect, Route} from "react-router-dom";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 import Home from "./pages/Home";
@@ -33,7 +33,9 @@ class App extends Component {
           <main className="layout-content">
             {/* 注册路由 */}
             <Route path="/home" component={Home} />
-            <Route path="/about" component={About} />
+            {/* exact：开启严格匹配 */}
+            <Route exact path="/about" component={About} />
+            <Redirect to="/about"/>
           </main>
 
           <footer className="layout-footer">

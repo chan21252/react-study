@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './header.css';
 
-class Index extends Component {
+class Header extends Component {
   render() {
     return (
       <div className="header-bar">
@@ -11,4 +11,4 @@ class Index extends Component {
   }
 }
 
-export default Index;
+export default Header;
