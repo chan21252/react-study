@@ -6,7 +6,9 @@
 }
 html {
   --primary-font-color: #000;
-  --primary-theme-color: #1890ff;
+  --primary-color: #1890ff;
+  --primary-color-active: #096dd9;
+  --primary-color-hover: #40a9ff;
 }
 
 ::-webkit-scrollbar {

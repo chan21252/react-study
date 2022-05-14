@@ -21,33 +21,37 @@ class Details extends Component {
   UNSAFE_componentWillReceiveProps(nextProps, nextContext) {
     const {match, location} = nextProps
     // 接受params参数
-    //const id = match.params.id;
+    // const id = match.params.id;
     // 接受search参数
-    //const search = queryString.parse(location.search);
-    //const id = search.id;
+    const search = queryString.parse(location.search);
+    const id = search.id;
     // 接受state参数
-    const {id} = location.state;
-    this.getDetailsData(id);
+    // const {id} = location.state || {};
+    if (id) {
+      this.getDetailsData(id);
+    }
   }
 
   // 挂载完毕获取数据
   componentDidMount() {
     const {match, location} = this.props
     // 接受params参数
-    //const id = match.params.id;
+    // const id = match.params.id;
     // 接受search参数
-    //const search = queryString.parse(location.search);
-    //const id = search.id;
+    const search = queryString.parse(location.search);
+    const id = search.id;
     // 接受state参数
-    const {id} = location.state;
-    this.getDetailsData(id);
+    // const {id} = location.state || {};
+    if (id) {
+      this.getDetailsData(id);
+    }
   }
 
   render() {
     const {news} = this.state;
     return (
       <div>
-        <h4>{news.title}</h4>
+        <h4>{news.id}-{news.title}</h4>
         <div>{news.author}</div>
         <p>{news.content}</p>
       </div>

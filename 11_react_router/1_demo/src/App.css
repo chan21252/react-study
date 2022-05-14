@@ -72,7 +72,7 @@
 }
 
 .menu-item.active, .menu-item:hover {
-  color: var(--primary-theme-color);
+  color: var(--primary-color-active);
 }
 
 .content {
@@ -99,7 +99,7 @@
 }
 
 .content-tab-item.active, .content-tab-item:hover {
-  color: var(--primary-theme-color);
+  color: var(--primary-color-active);
 }
 
 .content-tab-item.active:after {
@@ -108,9 +108,47 @@
   right: 20px;
   bottom: 0;
   left: 20px;
-  border-bottom: 2px solid var(--primary-theme-color);
+  border-bottom: 2px solid var(--primary-color-active);
 }
 
 .content-panel {
   padding: 20px;
+}
+
+.btn {
+  position: relative;
+  margin-right: 8px;
+  margin-bottom: 12px;
+  line-height: 1.5715;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 2px #00000004;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  height: 32px;
+  padding: 4px 15px;
+  font-size: 14px;
+  border-radius: 2px;
+  color: #000000d9;
+  border-color: #d9d9d9;
+  background: #fff none;
+}
+
+.btn-primary {
+  color: #fff;
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  text-shadow: 0 -1px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px #0000000b;
+}
+
+.btn-primary:hover {
+  border-color: var(--primary-color-hover);
+  background: var(--primary-color-hover);
 }
