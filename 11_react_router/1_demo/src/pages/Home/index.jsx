@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import MyNavLink from "../../component/MyNavLink";
+import MyNavLink from "@/component/MyNavLink";
 import {Redirect, Route} from "react-router-dom";
 import News from "./News";
 import Message from "./Message";
@@ -8,7 +8,7 @@ import Details from "./News/Details";
 class Home extends Component {
   render() {
     const {props} = this;
-    console.log('home接受到的props', props);
+    console.log('Home组件接受到的props', props);
     return (
       <div className="content">
         <h3>Home</h3>
@@ -20,9 +20,6 @@ class Home extends Component {
           <Route path="/home/news" component={News}/>
           <Route path="/home/message" component={Message}/>
           <Redirect to="/home/news"/>
-        </section>
-        <section className="content-panel">
-          <Route path="/home/news/details/:id" component={Details}/>
         </section>
       </div>
     );

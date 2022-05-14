@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Route} from "react-router-dom";
 import axios from "axios";
-import "../../../mock/api";
+import "@/mock/api";
 import Details from "./Details";
 
 class News extends Component {
@@ -12,27 +12,36 @@ class News extends Component {
   componentDidMount() {
     axios.get("/api/news/list")
       .then(response => {
-        console.log(response.data)
-        this.setState({newsList: response.data.result});
+        console.log("获取新闻列表", response.data)
+        this.setState({newsList: response.data.data});
       });
   }
 
   render() {
     const {newsList} = this.state;
-    console.log(newsList)
     return (
       <div>
-        <ul>
+        <ol>
           {
             newsList.map((news) => {
               return (
                 <li key={news.id} >
-                  <Link to={`/home/news/details/${news.id}`} >{news.title}</Link>
+                  {/* param传递参数 */}
+                  {/*<Link to={`/home/news/details/${news.id}`} >{news.id}.{news.title}</Link>*/}
+                  {/* search传递参数 */}
+                  {/*<Link to={`/home/news/details?id=${news.id}`}>{news.id}.{news.title}</Link>*/}
+                  {/* state传递参数 */}
+                  <Link to={{pathname:'/home/news/details', state: {id: news.id}}}>{news.id}.{news.title}</Link>
                 </li>
               );
             })
           }
-        </ul>
+        </ol>
+        <section className="content-panel">
+          {/* param接受参数 */}
+          {/*<Route path="/home/news/details/:id" component={Details}/>*/}
+          <Route path="/home/news/details" component={Details}/>
+        </section>
       </div>
     );
   }

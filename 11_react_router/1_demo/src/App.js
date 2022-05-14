@@ -1,9 +1,10 @@
 import './App.css';
 
 import React, {Component} from 'react';
-import {Link, NavLink, Redirect, Route} from "react-router-dom";
+import {Link, NavLink, Redirect, Route, Switch} from "react-router-dom";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
+import Sider from "@/component/Sider";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import MyNavLink from "./component/MyNavLink";
@@ -13,16 +14,7 @@ class App extends Component {
     return (
       <div className="layout layout-has-sider">
         <aside className="layout-sider">
-          <div className="menu">
-            <div className="menu-top">
-              <div className="menu-item">官网</div>
-            </div>
-            <ul className="menu-list">
-              {/* 编写路由 */}
-              <MyNavLink to="/home">主页</MyNavLink>
-              <MyNavLink to="/about">关于</MyNavLink>
-            </ul>
-          </div>
+          <Sider/>
         </aside>
 
         <section className="layout">
@@ -31,11 +23,14 @@ class App extends Component {
           </header>
 
           <main className="layout-content">
-            {/* 注册路由 */}
-            <Route path="/home" component={Home} />
-            {/* exact：开启严格匹配 */}
-            <Route exact path="/about" component={About} />
-            <Redirect to="/about"/>
+            <Switch>
+              {/* 注册路由 */}
+              {/* exact：开启严格匹配 */}
+              <Route exact path="/" component={Home} />
+              <Route path="/home" component={Home} />
+              <Route path="/about" component={About} />
+              <Redirect to="/about"/>
+            </Switch>
           </main>
 
           <footer className="layout-footer">

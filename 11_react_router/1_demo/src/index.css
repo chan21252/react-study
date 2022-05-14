@@ -5,7 +5,8 @@
   box-sizing: border-box;
 }
 html {
-  --primary-color: #1890ff;
+  --primary-font-color: #000;
+  --primary-theme-color: #1890ff;
 }
 
 ::-webkit-scrollbar {
