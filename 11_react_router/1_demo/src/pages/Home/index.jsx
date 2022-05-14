@@ -3,6 +3,7 @@ import MyNavLink from "../../component/MyNavLink";
 import {Redirect, Route} from "react-router-dom";
 import News from "./News";
 import Message from "./Message";
+import Details from "./News/Details";
 
 class Home extends Component {
   render() {
@@ -19,6 +20,9 @@ class Home extends Component {
           <Route path="/home/news" component={News}/>
           <Route path="/home/message" component={Message}/>
           <Redirect to="/home/news"/>
+        </section>
+        <section className="content-panel">
+          <Route path="/home/news/details/:id" component={Details}/>
         </section>
       </div>
     );
