@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <title>Counter</title>
+</head>
+<body>
+<div id="root">
+  结果：
+  <div id="result"></div>
+  输入框：<input id="num" type="number"/><br/>
+  操作：
+  <button id="btn-add" onclick="handleClick()">+</button>
+  <button id="btn-sub" onclick="handleClick()">-</button>
+  <button id="btn-multi" onclick="handleClick()">*</button>
+  <button id="btn-div" onclick="handleClick()">/</button>
+</div>
+</body>
+<script>
+  /**
+   * 创建一个store，管理应用状态
+   *
+   * @param state
+   * @param reducer
+   * @returns {{getState(): *, dispatch(*): void}|*}
+   */
+  const createStore = (state = {}, reducer) => {
+    this.state = state;
+    this.subscribers = [];  // state更新后的回调事件订阅列表
+
+    const _this = this;
+    return {
+      getState() {
+        return _this.state;
+      },
+
+      dispatch(action) {
+        _this.state = reducer(_this.state, action);
+        // 执行订阅回调
+        _this.subscribers.forEach(f => f());
+      },
+
+      subscribe(listener) {
+        _this.subscribers.push(listener)
+      }
+    }
+  };
+
+  const store = createStore({counter: 0}, reducer);
+  console.log(store);
+
+  /**
+   * 更新state的counter属性
+   *
+   * @param data   state.counter
+   * @param action  \{type, num}
+   * @returns {number}  更新后的counter数字
+   */
+  function updateCounter(data = 0, action) {
+    const {type, num} = action;
+    switch (type) {
+      case 'ADD':
+        return data + num;
+      case 'SUB':
+        return data - num;
+      case 'MULTI':
+        return data * num;
+      case 'DIV':
+        if (num === 0) {
+          alert("0不能作除数");
+          return data;
+        } else {
+          return data / num;
+        }
+      default:
+        return data;
+    }
+  }
+
+  /**
+   * 更新整个store的state
+   *
+   * @param prevState
+   * @param action
+   * @returns {{counter: number}}
+   */
+  function reducer(prevState = {}, action) {
+    return {
+      counter: updateCounter(prevState.counter, action)
+    }
+  }
+
+  function handleClick() {
+    const num = document.getElementById("num").value || 0;
+    const {id} = event.target;
+    let type = id.substring(id.lastIndexOf('-') + 1).toUpperCase();
+    // 创建Action
+    let action = {type, num: num * 1};
+    console.log(action)
+
+    // 传给dispatch处理
+    store.dispatch(action)
+    console.log(store.getState())
+  }
+
+  function render() {
+    document.getElementById("result").innerText = store.getState().counter;
+  }
+
+  window.onload = function () {
+    render();
+    // 订阅state更新后的回调事件
+    store.subscribe(render);
+  }
+
+</script>
+</html>
