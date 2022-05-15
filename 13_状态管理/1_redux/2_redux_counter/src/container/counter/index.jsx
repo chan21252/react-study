@@ -1,5 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {
+  createDecrementAction,
+  createIncrementAction,
+  createIncrementAsyncAction,
+  createIncrementIfOddAction
+} from "../../redux/counter_action";
 
+/**
+ * react ui组件
+ */
 class Counter extends Component {
 
   increment = () => {
@@ -39,4 +49,21 @@ class Counter extends Component {
   }
 }
 
-export default Counter;
+const mapStateToProps = (state, ownProps) => ({result: state.result, ownProps: ownProps.id});
+
+/*const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    increment: (num) => dispatch(createIncrementAction(num)),
+    decrement: (num) => dispatch(createDecrementAction(num)),
+    incrementIfOdd: (num) => dispatch(createIncrementIfOddAction(num)),
+    incrementAsync: (num, time) => dispatch(createIncrementAsyncAction(num, time))
+  }
+}*/
+const mapDispatchToProps = {
+  increment: createIncrementAction,
+  decrement: createDecrementAction,
+  incrementIfOdd: createIncrementIfOddAction,
+  incrementAsync: createIncrementAsyncAction
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
