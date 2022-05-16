@@ -1,4 +1,4 @@
-import {DECREMENT, INCREMENT, INCREMENT_ASYNC, INCREMENT_IF_ODD} from "./constant";
+import {DECREMENT, INCREMENT, INCREMENT_ASYNC, INCREMENT_IF_ODD} from "../constant";
 
 const initState = {result: 0};
 

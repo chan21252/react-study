@@ -5,7 +5,7 @@ import {
   createIncrementAction,
   createIncrementAsyncAction,
   createIncrementIfOddAction
-} from "../../redux/counter_action";
+} from "../../redux/action/counter_action";
 
 /**
  * react ui组件
@@ -33,18 +33,22 @@ class Counter extends Component {
 
   render() {
     return (
-      <div>
+      <form>
         <h4>结果为:{this.props.result}</h4>
-        <select name="select-num" ref={e => this.selectRef = e}>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-        </select>
-        <button onClick={this.increment}>加</button>
-        <button onClick={this.decrement}>减</button>
-        <button onClick={this.incrementIfOdd}>是奇数才加</button>
-        <button onClick={this.incrementAsync}>异步加</button>
-      </div>
+        <div className="form-group form-row">
+          <select name="select-num" className="col-2 form-control mr-3" ref={e => this.selectRef = e}>
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+          </select>
+          <div className="col">
+            <button type="button" className="btn btn-outline-primary mr-2" onClick={this.increment}>加</button>
+            <button type="button" className="btn btn-outline-primary mr-2" onClick={this.decrement}>减</button>
+            <button type="button" className="btn btn-outline-primary mr-2" onClick={this.incrementIfOdd}>是奇数才加</button>
+            <button type="button" className="btn btn-outline-primary mr-2" onClick={this.incrementAsync}>异步加</button>
+          </div>
+        </div>
+      </form>
     );
   }
 }
